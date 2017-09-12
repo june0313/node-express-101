@@ -2,13 +2,18 @@ var express = require('express');
 var app = express();
 var userRouter = require('./routes/user');
 
-var myLogger = function (req, res, next) {
-    console.log(req.method);
-    console.log(req.url);
-    next();
-};
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
 
-app.use(myLogger);
+// var myLogger = function (req, res, next) {
+//     console.log(req.method);
+//     console.log(req.url);
+//     next();
+// };
+
+// app.use(myLogger);
+app.use(morgan('dev'));
+app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
     res.send("Hello World!");
